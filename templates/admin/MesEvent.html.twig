@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<nav class="navbar navbar-expand-lg navbar-dark " style="background-color: #07092b;">
+    <ul class="navbar-nav mr-auto">
+
+      <li class="nav-item" style=" display:flex; flex-direction:row;">
+  <img class="card-img-top" src="{{ asset('images/logo.png') }}" alt="Card image cap" style="height:25px; width: 25px;margin-left:20px;margin-top:7px;">
+
+        <a class="nav-link" href="{{path('app_events_index')}}" style="margin-left:20px;">Home </span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{path('admin_app_add')}}">Creer Evennement</a>
+      </li>
+      <li class="nav-item active">
+         <a class="nav-link" href="{{path('admin_mes_events')}}">Mes Evennement</a>
+      </li>
+      <li class="nav-item">
+         <a class="nav-link" href="{{path('app_events_nonconfirmer')}}">Liste Non Confirmer</a>
+      </li>
+
+    </ul>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  
+  <a class="nav-link" href="#" style="margin-left:70%;color:rgba(255,255,255,.55);">{{user}}</a>
+<div style="border:white solid 1px;"> 
+      <a class="nav-link" href="{{path('security_logout')}}" > Logout </a>
+      
+  </div>
+  </div>
+</nav>
+<div>
+
+<center> <h1>Mes Evennements</h1></center>
+<br>
+</div>
+<div style="display:grid;grid-template-columns: 25% 25% 25% 25%;">
+
+  {% for event in events %}
+  {% if event.user.id == userId %}
+
+  <div class="card" style="width: 18rem; margin-bottom:30px;margin-left:20px;">
+  <img class="card-img-top" src="{{ asset('images/nuit.jfif') }}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{ event.title }}</h5>
+    <p class="card-text">{{ event.description }}</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">date debut :{{ event.dateD }}</li>
+    <li class="list-group-item">date fin :{{ event.dateF }}</li>
+    <li class="list-group-item">heure debut :{{ event.heureD }}</li>
+<li class="list-group-item">
+  <a href="{{ path('app_events_show', {'id': event.id}) }}" class="card-link"> plus de details▼</a>
+</li>
+  </ul>
+  <div class="card-body" style="display:flex;flex-direction:row;">
+    <a href="{{ path('app_events_edit', {'id': event.id}) }} "class="btn btn-success" style="margin-right:20px;margin-left:40px;">Edit</a>
+    <form method="post" action="{{ path('app_events_delete', {'id': event.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ event.id) }}">
+    <button class="btn btn-danger">Delete</button>
+
+</div>
+</form>
+  </div>
+  {% endif %}
+    {% else %}
+    <tr>
+      <td colspan="13">no records found</td>
+    </tr>
+    {% endfor %}
+</div>
+
+  <a href="">Create new</a>
+  {% endblock %}

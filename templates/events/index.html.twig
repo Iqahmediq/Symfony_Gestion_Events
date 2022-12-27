@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<nav class="navbar navbar-expand-lg navbar-dark " style="background-color: #07092b;">
+    <ul class="navbar-nav mr-auto">
+
+      <li class="nav-item active" style=" display:flex; flex-direction:row;">
+  <img class="card-img-top" src="{{ asset('images/logo.png') }}" alt="Card image cap" style="height:25px; width: 25px;margin-left:20px;margin-top:7px;">
+
+        <a class="nav-link" href="{{path('app_events_index')}}" style="margin-left:20px;">Home </span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{path('app_add')}}">Creer Evennement</a>
+      </li>
+      <li class="nav-item">
+         <a class="nav-link" href="{{path('app_events_indexMy')}}">Mes Evennement</a>
+      </li>
+      <li class="nav-item">
+         <a class="nav-link" href="{{path('app_events_participation')}}">Mes participations</a>
+      </li>
+
+    </ul>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  
+  <a class="nav-link" href="#" style="margin-left:70%;color:rgba(255,255,255,.55);">{{user}}</a>
+<div style="border:white solid 1px;"> 
+      <a class="nav-link" href="{{path('security_logout')}}" > Logout </a>
+      
+  </div>
+  </div>
+</nav>
+<br>
+<center>
+  <h1>Espace etudiant</h1>
+</center>
+<br>
+<div style="display:grid;grid-template-columns: 25% 25% 25% 25%; margin-left:40px;">
+
+  {% for event in events %}
+  {% if event.valid %}
+  <div class="card" style="width: 18rem;margin-bottom:40px;">
+  <img class="card-img-top" src="{{ asset('images/nuit.jfif') }}" alt="Card image cap">
+  <div class="card-body">
+    <h3 style="font-weight: bold;" class="card-title">{{ event.title }}</h3>
+
+    <p class="card-text">{{ event.description }}</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">date debut :{{ event.dateD }}</li>
+    <li class="list-group-item">date fin :{{ event.dateF }}</li>
+    <li class="list-group-item">heure debut :{{ event.heureD }}</li>
+    <li class="list-group-item">
+  <a href="{{ path('app_events_show', {'id': event.id}) }}" class="card-link"> plus de details▼</a>
+</li>
+  </ul>
+
+</div>
+  {% endif %}
+
+    {% else %}
+    <tr>
+      <td colspan="13">no records found</td>
+    </tr>
+    {% endfor %}
+</div>
+
+  {% endblock %}

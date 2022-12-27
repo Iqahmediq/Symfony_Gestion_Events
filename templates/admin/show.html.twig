@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Event{% endblock %}
+
+{% block body %}
+
+
+<div class='dashboard' >
+  <div class="dashboard-nav"style="padding-top:4%;">
+    <header><a href="#!" class="menu-toggle"><i class="fas fa-bars"></i></a>
+      <a href="#" class="brand-logo"><i class="fas fa-anchor"></i> <span>PolyTechnique</span></a></header>
+    <nav class="dashboard-nav-list">
+    <a href="{{path('app_events_index')}}" class="dashboard-nav-item"><i class="fas fa-home"></i> Home </a>
+    <a href="#" class="dashboard-nav-item"><i class="fas fa-tachometer-alt"></i> Creer Evennement</a>
+      <a href="{{path('security_logout')}}" class="dashboard-nav-item"><i class="fas fa-sign-out-alt"></i> Logout </a>
+  </div>
+    <h1>Event</h1>
+    <div class="card" style="width: 30rem; margin-left:30%;">
+  <img class="card-img-top" src="{{ asset('images/nuit.jfif') }}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{ event.title }}</h5>
+    <p class="card-text">{{ event.description }}</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Id : {{ event.id }}</li>
+    <li class="list-group-item"> date du debut :{{ event.dateD }}</li>
+    <li class="list-group-item">date du fin : {{ event.dateF }}</li>
+    <li class="list-group-item">heure du debut : {{ event.heureD  }}</li>
+    <li class="list-group-item">heure du fin : {{ event.heureF }}</li>
+    <li class="list-group-item">date du fin : {{ event.lieu }} </li>
+    <li class="list-group-item">validation : {{ event.valid ? 'Yes' : 'No' }}</li>
+    <li class="list-group-item">validation : {{ event.valid ? 'Yes' : 'No' }}</li>
+    <li class="list-group-item">archive : {{ event.archive ? 'Yes' : 'No' }}</li>
+    <li class="list-group-item">prix de participation : {{ event.prix }}</li>
+  </ul>
+  <div class="card-body">
+  
+<form method="get" action="{{ path('admin_events_confirm', {'id': event.id}) }}">
+  <a href="{{ path('admin_events_confirm', {'id': event.id}) }}">confirmer</a>
+</form>
+    <form method="post" action="{{ path('admin_events_delete', {'id': event.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ event.id) }}">
+    <button class="btn">Delete</button>
+    <a href="{{ path('admin_edit', {'id': event.id}) }}">edit</a>
+</form>
+  </div>
+</div>
+  </div>
+
+
+    <a href="{{ path('app_events_index') }}">back to list</a>
+
+    <a href="{{ path('app_events_edit', {'id': event.id}) }}">edit</a>
+
+    {{ include('events/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,107 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello EventController!{% endblock %}
+
+{% block body %}
+<div class='dashboard'>
+  <div class="dashboard-nav" style="background-color: #07092b;">
+    <header><a href="#!" class="menu-toggle"><i class="fas fa-bars"></i></a>
+      <a href="#" class="brand-logo"><i class="fas fa-anchor"></i> <span>PolyTechnique</span></a></header>
+    <nav class="dashboard-nav-list">
+    <a href="{{path('admin')}}" class="dashboard-nav-item"><i class="fas fa-home"></i> Home </a>
+    <a href="#" class="dashboard-nav-item active"><i class="fas fa-tachometer-alt"></i> Creer Evennement</a>
+      <a href="{{path('security_logout')}}" class="dashboard-nav-item"><i class="fas fa-sign-out-alt"></i> Logout </a>
+    </nav>
+  </div>
+  <div class='dashboard-app'>
+    <div class='dashboard-content'>
+      <section class="vh-100" style="background-color: #eee;">
+        <div class="container h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-lg-12 col-xl-11">
+              <div class="card text-black" style="border-radius: 25px;">
+                <div class="card-body p-md-5">
+                  <div class="row justify-content-center">
+                    <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+                      <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Ajouter Evennement</p>
+                                            <form class="mx-1 mx-md-4" action="{{ path('admin_app_events_new') }}" method="get">
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <div class="form-outline flex-fill mb-0">
+                     <label for="titre" >titre</label>
+                    <input class="form-control" type="text" id="titre" name="_titre" />
+                    </div>
+                  </div>
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <div class="form-outline flex-fill mb-0">
+                     <label for="description">description</label>
+                    <textarea class="form-control" id="description" name="_description"/></textarea>
+                    </div>
+                  </div>
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <div class="form-outline flex-fill mb-0">
+                     <label for="date_d" >Date Debut</label>
+                    <input class="form-control" type="date" id="date_d" name="_date_d" />
+                    </div>
+                  </div>
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <div class="form-outline flex-fill mb-0">
+                     <label for="date_f" >Date Fin</label>
+                    <input class="form-control" type="date" id="date_f" name="_date_f" />
+                    </div>
+                  </div>
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <div class="form-outline flex-fill mb-0">
+                     <label for="heure_d" >Heure debut</label>
+                    <input class="form-control" type="time" id="heure_d" name="_heure_d" />
+                    </div>
+                  </div>
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <div class="form-outline flex-fill mb-0">
+                     <label for="heure_f" >Durée</label>
+                    <input class="form-control" type="text" id="heure_f" name="_heure_f" />
+                    </div>
+                  </div>
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <div class="form-outline flex-fill mb-0">
+                     <label for="prix" >Prix</label>
+                    <input class="form-control" type="text" id="prix" name="_prix" />
+                    </div>
+                  </div>
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <div class="form-outline flex-fill mb-0">
+                     <label for="lieu" >Lieu</label>
+                    <input class="form-control" type="text" id="lieu" name="_lieu" />
+                    </div>
+                  </div>
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <div class="form-outline flex-fill mb-0">
+                     <label for="image" >image</label>
+                    <input class="form-control" type="file" id="image" name="_image" />
+                    </div>
+                  </div>
+
+
+                  
+                  <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                    <button style="background-color:#6b061c;" type="reset" class="btn btn-primary btn-lg">Annuler</button>
+                    <button style="margin-left:60px;" type="submit" class="btn btn-primary btn-lg">Ajouter</button>
+
+                  </div>
+                </form>    
+                        
+                        
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}
